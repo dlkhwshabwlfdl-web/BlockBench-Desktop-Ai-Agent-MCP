@@ -1,0 +1,46 @@
+{"at":1790187438057,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token AhVk*** (32 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790187438063,"level":"info","message":"plugin already up to date at C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins\\blockbench-ai-agent.js"}
+{"at":1790187504657,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token xGKV*** (32 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790187504664,"level":"info","message":"plugin already up to date at C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins\\blockbench-ai-agent.js"}
+{"at":1790187693207,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token 3uyv*** (32 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790187693214,"level":"info","message":"plugin already up to date at C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins\\blockbench-ai-agent.js"}
+{"at":1790188872862,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token mueg*** (16 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790188872881,"level":"info","message":"bridge listening on http://127.0.0.1:47311 (plugin socket: ws://127.0.0.1:47311/plugin)"}
+{"at":1790189829818,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token mueg*** (16 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790189829835,"level":"info","message":"bridge listening on http://127.0.0.1:47311 (plugin socket: ws://127.0.0.1:47311/plugin)"}
+{"at":1790189832648,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790189832650,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790189832651,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790189832652,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790190388984,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token mueh*** (16 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790190389002,"level":"info","message":"bridge listening on http://127.0.0.1:47311 (plugin socket: ws://127.0.0.1:47311/plugin)"}
+{"at":1790190389828,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790190389831,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790190389831,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790190389834,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790190542194,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token mueh*** (16 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790190542213,"level":"info","message":"bridge listening on http://127.0.0.1:47311 (plugin socket: ws://127.0.0.1:47311/plugin)"}
+{"at":1790190545021,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790190545027,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790190545027,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790190545030,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790190886468,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token mueh*** (16 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790190886484,"level":"info","message":"bridge listening on http://127.0.0.1:47311 (plugin socket: ws://127.0.0.1:47311/plugin)"}
+{"at":1790190889356,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790190889363,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790190889363,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790190889365,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790190889487,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790190889487,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790190889989,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support · lost: fingerprint.resolution"}
+{"at":1790190889989,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790191689951,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex\\plugin","endpoint":"127.0.0.1:47311","auth":"token mueh*** (16 chars)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790191689969,"level":"info","message":"bridge listening on http://127.0.0.1:47311 (plugin socket: ws://127.0.0.1:47311/plugin)"}
+{"at":1790191692856,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790191692860,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790191692860,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790191692863,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790191692982,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790191692983,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790191693495,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790191693496,"level":"info","message":"plugin link established — the agent can build now"}
