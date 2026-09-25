@@ -1,0 +1,35 @@
+{
+  "name": "blockbench-ai-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Blockbench AI Agent plugin + local Agent Bridge: autonomous inspection and construction of Minecraft assets inside Blockbench 5.x",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "extract-api": "node tools/extract-blockbench-api.mjs",
+    "build": "node esbuild.mjs",
+    "build:watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "doctor": "node dist/agent-bridge.js --doctor",
+    "bridge": "node dist/agent-bridge.js --serve",
+    "mcp": "node dist/agent-bridge.js --mcp",
+    "install-plugin": "node tools/install-plugin.mjs",
+    "verify": "npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "pngjs": "^7.0.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pngjs": "^6.0.5",
+    "@types/ws": "^8.5.13",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
