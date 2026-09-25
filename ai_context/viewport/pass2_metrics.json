@@ -1,0 +1,47 @@
+{
+  "front": {
+    "empty": false,
+    "w": 700,
+    "h": 692,
+    "aspect": 1.01,
+    "fill": 0.765,
+    "cx": 0.499,
+    "cy": 0.499
+  },
+  "back": {
+    "empty": false,
+    "w": 700,
+    "h": 692,
+    "aspect": 1.01,
+    "fill": 0.765,
+    "cx": 0.499,
+    "cy": 0.499
+  },
+  "left": {
+    "empty": false,
+    "w": 700,
+    "h": 700,
+    "aspect": 1,
+    "fill": 0.814,
+    "cx": 0.499,
+    "cy": 0.499
+  },
+  "top": {
+    "empty": false,
+    "w": 700,
+    "h": 700,
+    "aspect": 1,
+    "fill": 0.949,
+    "cx": 0.499,
+    "cy": 0.499
+  },
+  "iso_right": {
+    "empty": false,
+    "w": 641,
+    "h": 627,
+    "aspect": 1.02,
+    "fill": 0.592,
+    "cx": 0.483,
+    "cy": 0.551
+  }
+}

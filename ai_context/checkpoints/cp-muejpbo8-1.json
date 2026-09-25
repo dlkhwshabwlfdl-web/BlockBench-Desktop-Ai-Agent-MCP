@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "checkpoint_id": "cp-muejpbo8-1",
+    "label": "before T-Rex build",
+    "created_at": 1790194700888,
+    "project_name": "trex",
+    "format_id": "free",
+    "undo_index": 0,
+    "undo_length": 0,
+    "counts": {
+      "elements": 0
+    }
+  },
+  "model": {
+    "meta": {
+      "format_version": "5.0",
+      "model_format": "free",
+      "box_uv": false
+    },
+    "name": "trex",
+    "model_identifier": "",
+    "visible_box": [
+      1,
+      1,
+      0
+    ],
+    "variable_placeholders": "",
+    "multi_file_ruleset": "",
+    "variable_placeholder_buttons": [],
+    "timeline_setups": [],
+    "unhandled_root_fields": {},
+    "resolution": {
+      "width": 16,
+      "height": 16
+    },
+    "elements": [],
+    "groups": [],
+    "outliner": [],
+    "textures": []
+  }
+}

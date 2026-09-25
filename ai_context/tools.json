@@ -1,0 +1,3454 @@
+{
+  "source": "live",
+  "count": 77,
+  "plugin": [
+    {
+      "name": "assign_texture",
+      "title": "Assign texture",
+      "description": "Assign a texture to cube faces. Works on a single cube, several cubes, or a whole group (cubes are collected recursively). Omit `faces` to assign all six faces.",
+      "group": "texture",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "texture": {
+            "type": "string",
+            "description": "Texture name or uuid"
+          },
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            }
+          },
+          "references": {
+            "type": "array",
+            "description": "Several nodes (groups are expanded to their cubes)",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              }
+            }
+          },
+          "faces": {
+            "type": "array",
+            "description": "Faces to affect; omit for all six faces",
+            "items": {
+              "type": "string",
+              "enum": [
+                "north",
+                "east",
+                "south",
+                "west",
+                "up",
+                "down"
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "texture"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ assigned_faces, cubes }"
+    },
+    {
+      "name": "auto_uv",
+      "title": "Auto UV",
+      "description": "Recompute automatic UVs for one or more cubes with `Cube.mapAutoUV()`, which is exactly what the outliner auto-UV button calls. Use after resizing or repositioning cubes so their texture regions stay in sync.",
+      "group": "texture",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            }
+          },
+          "references": {
+            "type": "array",
+            "description": "Several nodes; groups are expanded recursively",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ updated: string[], skipped: string[] }"
+    },
+    {
+      "name": "bulk_create_cubes",
+      "title": "Create many cubes",
+      "description": "Create many cubes in a single undo step. This is the primary construction tool: a detailed Minecraft creature is built from one or a few calls like this rather than dozens of single-cube calls. Every cube may also be placed under a group by name via its `parent` field.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "cubes": {
+            "type": "array",
+            "description": "Cube definitions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Cube name"
+                },
+                "from": {
+                  "type": "array",
+                  "description": "Minimum corner in Blockbench units (three numbers: [x, y, z])",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "to": {
+                  "type": "array",
+                  "description": "Maximum corner in Blockbench units (three numbers: [x, y, z])",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "origin": {
+                  "type": "array",
+                  "description": "Pivot point; defaults to the centre of the cube (three numbers: [x, y, z])",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "rotation": {
+                  "type": "array",
+                  "description": "Euler rotation in degrees (three numbers: [x, y, z])",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "inflate": {
+                  "type": "number",
+                  "description": "Uniform inflation in units (0 = none)"
+                },
+                "uv_offset": {
+                  "type": "array",
+                  "description": "Box UV offset on the texture (two numbers: [u, v])",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "mirror_uv": {
+                  "type": "boolean",
+                  "description": "Mirror UV winding"
+                },
+                "shade": {
+                  "type": "boolean",
+                  "description": "Enable shading"
+                },
+                "autouv": {
+                  "type": "integer",
+                  "description": "Auto UV mode: 0 off, 1 auto, 2 relative",
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "box_uv": {
+                  "type": "boolean",
+                  "description": "Use box UV instead of per-face UV"
+                },
+                "visibility": {
+                  "type": "boolean",
+                  "description": "Visible in the viewport"
+                },
+                "color": {
+                  "type": "integer",
+                  "description": "Marker colour index"
+                },
+                "texture": {
+                  "type": "string",
+                  "description": "Texture uuid or name to assign to every face; use null to clear"
+                },
+                "export": {
+                  "type": "boolean",
+                  "description": "Include in exports"
+                },
+                "locked": {
+                  "type": "boolean",
+                  "description": "Lock editing"
+                },
+                "parent": {
+                  "type": "string",
+                  "description": "Name or uuid of the group to place this cube under"
+                }
+              },
+              "required": [
+                "from",
+                "to"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 800
+          },
+          "parent": {
+            "type": "string",
+            "description": "Default parent group name/uuid applied to cubes that do not specify one"
+          }
+        },
+        "required": [
+          "cubes"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ created: [...], created_count, warnings, verification }"
+    },
+    {
+      "name": "bulk_create_keyframes",
+      "title": "Create many keyframes",
+      "description": "Create many keyframes across any number of bones in one call and one undo step. This is how a walk cycle or attack animation should be authored: describe every pose in a single call instead of one keyframe at a time.",
+      "group": "animation",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "animation": {
+            "type": "string",
+            "description": "Animation name (defaults to the active animation)"
+          },
+          "keyframes": {
+            "type": "array",
+            "description": "Keyframe definitions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "node": {
+                  "type": "string",
+                  "description": "Bone/group name or uuid"
+                },
+                "channel": {
+                  "type": "string",
+                  "description": "Channel",
+                  "enum": [
+                    "rotation",
+                    "position",
+                    "scale"
+                  ]
+                },
+                "time": {
+                  "type": "number",
+                  "description": "Time in seconds",
+                  "minimum": 0
+                },
+                "x": {
+                  "type": "number",
+                  "description": "X value"
+                },
+                "y": {
+                  "type": "number",
+                  "description": "Y value"
+                },
+                "z": {
+                  "type": "number",
+                  "description": "Z value"
+                },
+                "interpolation": {
+                  "type": "string",
+                  "description": "Interpolation",
+                  "enum": [
+                    "linear",
+                    "catmullrom",
+                    "bezier",
+                    "step"
+                  ]
+                }
+              },
+              "required": [
+                "node",
+                "channel",
+                "time"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 2000
+          },
+          "set_length": {
+            "type": "boolean",
+            "description": "Extend the animation length to fit the last keyframe",
+            "default": true
+          }
+        },
+        "required": [
+          "keyframes"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ created, max_time, animation_length, warnings }"
+    },
+    {
+      "name": "checkpoint",
+      "title": "Create checkpoint",
+      "description": "Record a restorable point in the project history. It stores both the undo stack position and a full compiled snapshot, so it can be restored either by rewinding undo (instant) or by reloading the snapshot. Always available even where no native checkpoint API exists, because Blockbench has none.",
+      "group": "recovery",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Human readable label",
+            "default": "checkpoint"
+          },
+          "include_snapshot": {
+            "type": "boolean",
+            "description": "Also store a full project snapshot on disk",
+            "default": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "CheckpointRecord (without the snapshot payload)"
+    },
+    {
+      "name": "create_animation",
+      "title": "Create animation",
+      "description": "Create a new empty animation. `loop` is once / loop / hold. Length is in the format's native time unit (seconds for Bedrock and Java). Pass `select: true` to make it the active animation, which is required before its keyframes are shown in the timeline.",
+      "group": "animation",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Animation name, e.g. \"animation.trex.walk\""
+          },
+          "loop": {
+            "type": "string",
+            "description": "Loop mode",
+            "enum": [
+              "once",
+              "loop",
+              "hold"
+            ]
+          },
+          "length": {
+            "type": "number",
+            "description": "Length in seconds",
+            "minimum": 0
+          },
+          "snapping": {
+            "type": "number",
+            "description": "Snap rate in keyframes per second (1-120)",
+            "minimum": 1,
+            "maximum": 120
+          },
+          "select": {
+            "type": "boolean",
+            "description": "Make this the active animation",
+            "default": true
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "AnimationSummary"
+    },
+    {
+      "name": "create_bone",
+      "title": "Create bone",
+      "description": "Create a bone. In Blockbench a bone IS a group inside a format with `bone_rig` enabled, so this validates that the active format is a rig format and otherwise fails with a clear message.",
+      "group": "hierarchy",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Bone name (Minecraft bone names must match ^[a-zA-Z0-9_]+$)"
+          },
+          "origin": {
+            "type": "array",
+            "description": "Bone pivot in Blockbench units, i.e. where it rotates from (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation": {
+            "type": "array",
+            "description": "Rest rotation in degrees (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "parent": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Parent group uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Parent group name"
+              }
+            },
+            "description": "Parent group; omit to place at the outliner root.",
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "NodeSummary"
+    },
+    {
+      "name": "create_cube",
+      "title": "Create cube",
+      "description": "Create a single cube. Coordinates are Blockbench units where 16 units = 1 Minecraft block and the origin sits at the bottom centre of the model. Prefer bulk_create_cubes when building more than a couple of cubes.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Cube name"
+          },
+          "from": {
+            "type": "array",
+            "description": "Minimum corner in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "to": {
+            "type": "array",
+            "description": "Maximum corner in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "origin": {
+            "type": "array",
+            "description": "Pivot point; defaults to the centre of the cube (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation": {
+            "type": "array",
+            "description": "Euler rotation in degrees (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "inflate": {
+            "type": "number",
+            "description": "Uniform inflation in units (0 = none)"
+          },
+          "uv_offset": {
+            "type": "array",
+            "description": "Box UV offset on the texture (two numbers: [u, v])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "mirror_uv": {
+            "type": "boolean",
+            "description": "Mirror UV winding"
+          },
+          "shade": {
+            "type": "boolean",
+            "description": "Enable shading"
+          },
+          "autouv": {
+            "type": "integer",
+            "description": "Auto UV mode: 0 off, 1 auto, 2 relative",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "box_uv": {
+            "type": "boolean",
+            "description": "Use box UV instead of per-face UV"
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visible in the viewport"
+          },
+          "color": {
+            "type": "integer",
+            "description": "Marker colour index"
+          },
+          "texture": {
+            "type": "string",
+            "description": "Texture uuid or name to assign to every face; use null to clear"
+          },
+          "export": {
+            "type": "boolean",
+            "description": "Include in exports"
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "Lock editing"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ cube, warnings? }"
+    },
+    {
+      "name": "create_group",
+      "title": "Create group",
+      "description": "Create an outliner group (bone in rig formats). Groups own a pivot (`origin`) and rotation and are the only way to build an animatable hierarchy. Optionally nest it under an existing group.",
+      "group": "hierarchy",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Group name"
+          },
+          "origin": {
+            "type": "array",
+            "description": "Pivot point in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation": {
+            "type": "array",
+            "description": "Euler rotation in degrees (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "parent": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Parent group uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Parent group name"
+              }
+            },
+            "description": "Parent group; omit to place at the outliner root.",
+            "additionalProperties": false
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visible in the viewport",
+            "default": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "NodeSummary"
+    },
+    {
+      "name": "create_keyframe",
+      "title": "Create keyframe",
+      "description": "Create one keyframe on a bone. `time` is in the animation's native unit (seconds). For rotation and position x/y/z are degrees and Blockbench units; for scale they are multipliers (1 = unchanged). The keyframe is snapped and any previous keyframe at the same time on the same channel is replaced, exactly like the UI.",
+      "group": "animation",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "animation": {
+            "type": "string",
+            "description": "Animation name (defaults to the active animation)"
+          },
+          "node": {
+            "type": "string",
+            "description": "Bone/group name or uuid this keyframe animates"
+          },
+          "node_reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Bone uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Bone name"
+              }
+            }
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel",
+            "enum": [
+              "rotation",
+              "position",
+              "scale"
+            ]
+          },
+          "time": {
+            "type": "number",
+            "description": "Keyframe time in seconds",
+            "minimum": 0
+          },
+          "x": {
+            "type": "number",
+            "description": "X value"
+          },
+          "y": {
+            "type": "number",
+            "description": "Y value"
+          },
+          "z": {
+            "type": "number",
+            "description": "Z value"
+          },
+          "interpolation": {
+            "type": "string",
+            "description": "Interpolation",
+            "enum": [
+              "linear",
+              "catmullrom",
+              "bezier",
+              "step"
+            ]
+          }
+        },
+        "required": [
+          "channel",
+          "time"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "KeyframeSummary"
+    },
+    {
+      "name": "create_locator",
+      "title": "Create locator",
+      "description": "Create a locator (an empty positioned point used by Bedrock animation effects). Requires a format with locator support.",
+      "group": "hierarchy",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Locator name"
+          },
+          "position": {
+            "type": "array",
+            "description": "Position in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "parent": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Parent group uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Parent group name"
+              }
+            },
+            "description": "Parent group; omit to place at the outliner root.",
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "NodeSummary"
+    },
+    {
+      "name": "create_texture",
+      "title": "Create texture",
+      "description": "Create a new texture in the project, either from a base64 PNG data URL or as a solid colour of the given size. Returns the texture uuid which other tools use to assign it to cube faces.",
+      "group": "texture",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Texture name, e.g. \"trex_body\""
+          },
+          "width": {
+            "type": "integer",
+            "description": "Width in pixels (ignored when data_url is given)",
+            "minimum": 1,
+            "maximum": 4096
+          },
+          "height": {
+            "type": "integer",
+            "description": "Height in pixels (ignored when data_url is given)",
+            "minimum": 1,
+            "maximum": 4096
+          },
+          "data_url": {
+            "type": "string",
+            "description": "Base64 PNG data URL, e.g. \"data:image/png;base64,...\""
+          },
+          "fill_color": {
+            "type": "string",
+            "description": "Colour used to fill a blank texture, e.g. \"#4a7a3a\""
+          },
+          "particle": {
+            "type": "boolean",
+            "description": "Mark as a particle texture",
+            "default": false
+          },
+          "select": {
+            "type": "boolean",
+            "description": "Select the new texture",
+            "default": true
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "TextureSummary"
+    },
+    {
+      "name": "delete_animation",
+      "title": "Delete animation",
+      "description": "Permanently delete an animation and all of its keyframes.",
+      "group": "animation",
+      "danger": "destructive",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Animation name"
+          },
+          "uuid": {
+            "type": "string",
+            "description": "Animation uuid"
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true to confirm deletion",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ deleted, remaining }"
+    },
+    {
+      "name": "delete_keyframe",
+      "title": "Delete keyframe",
+      "description": "Delete a keyframe by bone + channel + time, or clear every keyframe of a bone/channel in a time range.",
+      "group": "animation",
+      "danger": "destructive",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "animation": {
+            "type": "string",
+            "description": "Animation name (defaults to the active animation)"
+          },
+          "node": {
+            "type": "string",
+            "description": "Bone/group name or uuid"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel",
+            "enum": [
+              "rotation",
+              "position",
+              "scale"
+            ]
+          },
+          "time": {
+            "type": "number",
+            "description": "Time of the keyframe to delete"
+          },
+          "from_time": {
+            "type": "number",
+            "description": "Delete keyframes at or after this time"
+          },
+          "to_time": {
+            "type": "number",
+            "description": "Delete keyframes at or before this time"
+          },
+          "delete_all": {
+            "type": "boolean",
+            "description": "Delete every keyframe on that bone/channel",
+            "default": false
+          }
+        },
+        "required": [
+          "node",
+          "channel"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ deleted: KeyframeSummary[], remaining }"
+    },
+    {
+      "name": "delete_node",
+      "title": "Delete node",
+      "description": "Delete one or more outliner nodes. Deleting a group also deletes its children unless `keep_children` is true, in which case they are re-parented to the group parent.",
+      "group": "geometry",
+      "danger": "destructive",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "references": {
+            "type": "array",
+            "description": "Delete several nodes at once",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              },
+              "description": "Node reference; omit to use the current selection."
+            }
+          },
+          "keep_children": {
+            "type": "boolean",
+            "description": "Re-parent children instead of deleting them",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ deleted: string[], kept_children: number }"
+    },
+    {
+      "name": "delete_texture",
+      "title": "Delete texture",
+      "description": "Remove a texture from the project. Cube faces that referenced it are cleared.",
+      "group": "texture",
+      "danger": "destructive",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "texture": {
+            "type": "string",
+            "description": "Texture name or uuid"
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true to confirm",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ deleted, remaining_textures }"
+    },
+    {
+      "name": "duplicate_animation",
+      "title": "Duplicate animation",
+      "description": "Copy an existing animation, including all keyframes and animators, under a new name. The preferred way to build a family of animations (idle, walk, run) from one base pose set.",
+      "group": "animation",
+      "danger": "mutating",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Source animation name"
+          },
+          "new_name": {
+            "type": "string",
+            "description": "Name for the copy"
+          },
+          "select": {
+            "type": "boolean",
+            "description": "Select the copy afterwards",
+            "default": false
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "AnimationSummary"
+    },
+    {
+      "name": "duplicate_array",
+      "title": "Duplicate array",
+      "description": "Duplicate a node `count` times applying a fixed translation (and optional rotation step) between copies. This is the correct way to build symmetric or repeated anatomy: two legs, a row of teeth, spines along the back. Each copy is placed under the same parent as the source.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "count": {
+            "type": "integer",
+            "description": "How many copies to create (1-200)",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "offset": {
+            "type": "array",
+            "description": "Translation applied between successive copies (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation_step": {
+            "type": "array",
+            "description": "Rotation added to each successive copy, in degrees (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "name_pattern": {
+            "type": "string",
+            "description": "Name template where {i} is replaced by the copy index",
+            "default": "{name}_{i}"
+          },
+          "include_first": {
+            "type": "boolean",
+            "description": "Also move the original node by offset * 0, i.e. keep it as copy 0 (default true)",
+            "default": true
+          }
+        },
+        "required": [
+          "count"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ created: string[], count }"
+    },
+    {
+      "name": "focus_viewport",
+      "title": "Focus viewport",
+      "description": "Move the viewport camera to a named angle preset (initial, north, south, east, west, top, bottom, isometric_right, isometric_left, true_isometric_right, true_isometric_left). Purely visual; does not modify the model.",
+      "group": "viewport",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "angle": {
+            "type": "string",
+            "description": "Camera preset id",
+            "default": "initial"
+          },
+          "zoom": {
+            "type": "number",
+            "description": "Orthographic zoom override",
+            "minimum": 0.01
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ angle, camera_position, target }"
+    },
+    {
+      "name": "get_live_viewport",
+      "title": "Get live viewport",
+      "description": "Crop exactly what the user currently sees in their viewport, including their camera angle and framing. Useful for answering \"does this look right from where I am looking\".",
+      "group": "visual",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "description": "Output width in pixels",
+            "default": 640,
+            "minimum": 64,
+            "maximum": 2048
+          },
+          "height": {
+            "type": "integer",
+            "description": "Output height in pixels",
+            "default": 640,
+            "minimum": 64,
+            "maximum": 2048
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "ViewportImage"
+    },
+    {
+      "name": "get_model_snapshot",
+      "title": "Get model snapshot",
+      "description": "Capture several camera angles of the model in one call — the main way to actually look at what was built. Defaults to the current view plus front, side, top and both isometric angles. Returns one PNG per angle so the caller can composite them.",
+      "group": "visual",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "angles": {
+            "type": "array",
+            "description": "Camera presets to capture",
+            "items": {
+              "type": "string",
+              "description": "Preset id"
+            },
+            "minItems": 1,
+            "maxItems": 8
+          },
+          "resolution": {
+            "type": "integer",
+            "description": "Square resolution per angle (128-1024)",
+            "default": 512,
+            "minimum": 128,
+            "maximum": 1024
+          },
+          "anti_aliasing": {
+            "type": "string",
+            "description": "Anti aliasing mode",
+            "enum": [
+              "off",
+              "msaa",
+              "ssaa"
+            ]
+          },
+          "shading": {
+            "type": "boolean",
+            "description": "Render with shading",
+            "default": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ images: ViewportImage[], available_presets: string[] }"
+    },
+    {
+      "name": "get_project_history",
+      "title": "Get project history",
+      "description": "Return the undo stack size and position plus the list of recent edits with labels and timestamps.",
+      "group": "recovery",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "How many entries to list (1-100)",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ undo, entries: [{index, message, time}] }"
+    },
+    {
+      "name": "get_texture_image",
+      "title": "Get texture image",
+      "description": "Return the actual pixels of a texture as a base64 PNG data URL so they can be looked at. Prefer this over get_texture_view when you want the texture itself rather than the editor around it.",
+      "group": "visual",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "texture": {
+            "type": "string",
+            "description": "Texture name or uuid (defaults to the selected texture)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ texture, data_url, width, height }"
+    },
+    {
+      "name": "get_texture_view",
+      "title": "Get texture view",
+      "description": "Capture the 2D texture editor canvas, including the UV overlay, so you can see how faces are laid out over the texture as well as the texture itself.",
+      "group": "visual",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "description": "Canvas width in pixels",
+            "minimum": 64,
+            "maximum": 4096
+          },
+          "height": {
+            "type": "integer",
+            "description": "Canvas height in pixels",
+            "minimum": 64,
+            "maximum": 4096
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "ViewportImage"
+    },
+    {
+      "name": "get_uv_view",
+      "title": "Get UV view",
+      "description": "Capture the UV editor so you can judge whether face UVs are packed sensibly, mirrored correctly and free of overlaps.",
+      "group": "visual",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "description": "Canvas width in pixels",
+            "minimum": 64,
+            "maximum": 4096
+          },
+          "height": {
+            "type": "integer",
+            "description": "Canvas height in pixels",
+            "minimum": 64,
+            "maximum": 4096
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "ViewportImage"
+    },
+    {
+      "name": "get_viewport_image",
+      "title": "Get viewport image",
+      "description": "Render the model to a PNG and return it as a data URL. `angle` selects the camera: \"view\" keeps the user's current angle, otherwise use a preset id (north/south/east/west/top/bottom/isometric_right/isometric_left/isometric/initial). The capture happens offscreen, so it does not move the user's viewport.",
+      "group": "visual",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "angle": {
+            "type": "string",
+            "description": "Camera preset id or \"view\"",
+            "default": "view"
+          },
+          "resolution": {
+            "type": "integer",
+            "description": "Square resolution in pixels (128-2048)",
+            "default": 640,
+            "minimum": 128,
+            "maximum": 2048
+          },
+          "anti_aliasing": {
+            "type": "string",
+            "description": "Anti aliasing mode",
+            "enum": [
+              "off",
+              "msaa",
+              "ssaa"
+            ]
+          },
+          "shading": {
+            "type": "boolean",
+            "description": "Render with shading",
+            "default": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "ViewportImage { angle, data_url, width, height, bytes }"
+    },
+    {
+      "name": "import_texture",
+      "title": "Import texture",
+      "description": "Add a texture to the project from a base64 PNG data URL (typically generated by the bridge and stored in the project). Optionally assigns it to every face of the given cubes right away.",
+      "group": "texture",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Texture name"
+          },
+          "data_url": {
+            "type": "string",
+            "description": "Base64 PNG data URL"
+          },
+          "assign_to": {
+            "type": "array",
+            "description": "Nodes whose cube faces should receive this texture",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              }
+            }
+          },
+          "faces": {
+            "type": "array",
+            "description": "Faces to affect; omit for all six faces",
+            "items": {
+              "type": "string",
+              "enum": [
+                "north",
+                "east",
+                "south",
+                "west",
+                "up",
+                "down"
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "name",
+          "data_url"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ texture, assigned_faces }"
+    },
+    {
+      "name": "inspect_animation",
+      "title": "Inspect animation",
+      "description": "One animation in full: its animators and, for each animator and channel, the keyframes with time, interpolation and data point values.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Animation name"
+          },
+          "uuid": {
+            "type": "string",
+            "description": "Animation uuid"
+          },
+          "include_keyframes": {
+            "type": "boolean",
+            "description": "Include keyframe values (default true)",
+            "default": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ animation, animators: [{ node, channels: { channel: KeyframeSummary[] } }] }"
+    },
+    {
+      "name": "inspect_animations",
+      "title": "Inspect animations",
+      "description": "Every animation in the project with its length, loop mode, snapping, marker names, animator count and total keyframe count.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "include_animators": {
+            "type": "boolean",
+            "description": "Include per-animator channel breakdown",
+            "default": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "AnimationSummary[]"
+    },
+    {
+      "name": "inspect_hierarchy",
+      "title": "Inspect hierarchy",
+      "description": "The outliner tree: groups and their children with pivots, rotations, visibility and, for cubes, from/to/size. Use `max_depth` to keep the payload small and `root` to inspect only a subtree.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "max_depth": {
+            "type": "integer",
+            "description": "How deep to descend (1-32)",
+            "default": 12,
+            "minimum": 1,
+            "maximum": 32
+          },
+          "root": {
+            "type": "object",
+            "description": "Reference to an outliner node. Supply uuid or name; omit both to use the current selection.",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Exact node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name (case insensitive; must be unique)"
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "NodeSummary[]"
+    },
+    {
+      "name": "inspect_model",
+      "title": "Inspect model",
+      "description": "Model level geometry statistics: total cubes, bounding box and overall size in Blockbench units, combined volume, per-axis histogram of element sizes, hidden and locked element counts, and how many cubes still have no texture assigned.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "include_cubes": {
+            "type": "boolean",
+            "description": "Include the full per-cube list (can be large)",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ bounding_box, size, stats, cubes? }"
+    },
+    {
+      "name": "inspect_node",
+      "title": "Inspect node",
+      "description": "Everything about a single node: full geometry, pivot, rotation, UV settings, per-face texture/UV/cullface, and its direct children.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "Node uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Node name"
+          },
+          "reference": {
+            "type": "object",
+            "description": "Reference to an outliner node. Supply uuid or name; omit both to use the current selection.",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Exact node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name (case insensitive; must be unique)"
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ node, faces?, children }"
+    },
+    {
+      "name": "inspect_project",
+      "title": "Inspect project",
+      "description": "Full project header: Blockbench version, project name and path, active model format and its capabilities (bone rig, box UV, animation mode, rotation limit), target version, resolution, saved state and element/group/texture/animation counts.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "returns": "{ project: ProjectSnapshot | null, undo: {index,length} | null }"
+    },
+    {
+      "name": "inspect_selection",
+      "title": "Inspect selection",
+      "description": "What the user currently has selected: groups, elements, textures, animation, keyframes and active mode.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "returns": "SelectionSummary"
+    },
+    {
+      "name": "inspect_textures",
+      "title": "Inspect textures",
+      "description": "Every texture in the project: name, pixel dimensions, file path, whether it is embedded, how its source is stored (data URL, path or empty), render mode and selection.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "returns": "TextureSummary[]"
+    },
+    {
+      "name": "inspect_uv",
+      "title": "Inspect UV",
+      "description": "UV mapping of one or more cubes: per-face UV rectangles, rotation, assigned texture, cullface; plus the cube-level uv_offset, autouv mode and box_uv flag. Also reports whether every UV rectangle fits inside the texture.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "description": "Reference to an outliner node. Supply uuid or name; omit both to use the current selection.",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Exact node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name (case insensitive; must be unique)"
+              }
+            }
+          },
+          "include_all_cubes": {
+            "type": "boolean",
+            "description": "Inspect every cube instead of a single node",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ cubes: [...], out_of_bounds: [...] }"
+    },
+    {
+      "name": "inspect_viewport",
+      "title": "Inspect viewport",
+      "description": "Viewport state: active preview, camera position and target, orthographic zoom, view mode, shading, display slot and how many elements are currently visible versus hidden. Use get_viewport_image afterwards for actual pixels.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "returns": "{ viewport, previews, angle_presets }"
+    },
+    {
+      "name": "list_capabilities",
+      "title": "List capabilities",
+      "description": "Report the running Blockbench build: version, platform, active format, which APIs were verified to exist, installed plugins, known limitations and the full list of real event names. Call this first when you need to know what the environment can do.",
+      "group": "discovery",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "description": "No arguments."
+      },
+      "returns": "CapabilityReport"
+    },
+    {
+      "name": "list_checkpoints",
+      "title": "List checkpoints",
+      "description": "List every checkpoint recorded in this session with its label, time and undo position.",
+      "group": "recovery",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "returns": "CheckpointRecord[]"
+    },
+    {
+      "name": "mark_project_saved",
+      "title": "Mark project saved",
+      "description": "Clear the unsaved-changes marker in Blockbench after the bridge has written the file to disk.",
+      "group": "project",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "save_path": {
+            "type": "string",
+            "description": "Absolute path the project was written to"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ saved, save_path }"
+    },
+    {
+      "name": "modify_animation",
+      "title": "Modify animation",
+      "description": "Rename an animation or change its length, loop mode and snapping rate.",
+      "group": "animation",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Current animation name"
+          },
+          "uuid": {
+            "type": "string",
+            "description": "Current animation uuid"
+          },
+          "new_name": {
+            "type": "string",
+            "description": "New animation name"
+          },
+          "length": {
+            "type": "number",
+            "description": "New length in seconds",
+            "minimum": 0
+          },
+          "loop": {
+            "type": "string",
+            "description": "Loop mode",
+            "enum": [
+              "once",
+              "loop",
+              "hold"
+            ]
+          },
+          "snapping": {
+            "type": "number",
+            "description": "Snap rate in keyframes per second",
+            "minimum": 1,
+            "maximum": 120
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "AnimationSummary"
+    },
+    {
+      "name": "modify_cube",
+      "title": "Modify cube",
+      "description": "Change an existing cube: resize (from/to), move/rotate via origin and rotation, inflate, mirror UV, assign a texture to every face, toggle auto UV. Returns the verified resulting geometry.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "name": {
+            "type": "string",
+            "description": "Cube name"
+          },
+          "from": {
+            "type": "array",
+            "description": "Minimum corner in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "to": {
+            "type": "array",
+            "description": "Maximum corner in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "origin": {
+            "type": "array",
+            "description": "Pivot point; defaults to the centre of the cube (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation": {
+            "type": "array",
+            "description": "Euler rotation in degrees (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "inflate": {
+            "type": "number",
+            "description": "Uniform inflation in units (0 = none)"
+          },
+          "uv_offset": {
+            "type": "array",
+            "description": "Box UV offset on the texture (two numbers: [u, v])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "mirror_uv": {
+            "type": "boolean",
+            "description": "Mirror UV winding"
+          },
+          "shade": {
+            "type": "boolean",
+            "description": "Enable shading"
+          },
+          "autouv": {
+            "type": "integer",
+            "description": "Auto UV mode: 0 off, 1 auto, 2 relative",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "box_uv": {
+            "type": "boolean",
+            "description": "Use box UV instead of per-face UV"
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visible in the viewport"
+          },
+          "color": {
+            "type": "integer",
+            "description": "Marker colour index"
+          },
+          "texture": {
+            "type": "string",
+            "description": "Texture uuid or name to assign to every face; use null to clear"
+          },
+          "export": {
+            "type": "boolean",
+            "description": "Include in exports"
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "Lock editing"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ cube }"
+    },
+    {
+      "name": "modify_keyframe",
+      "title": "Modify keyframe",
+      "description": "Change an existing keyframe: move it in time or change its x/y/z values and interpolation. The keyframe is located by bone + channel + time (within half a snapping step).",
+      "group": "animation",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "animation": {
+            "type": "string",
+            "description": "Animation name (defaults to the active animation)"
+          },
+          "node": {
+            "type": "string",
+            "description": "Bone/group name or uuid"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel",
+            "enum": [
+              "rotation",
+              "position",
+              "scale"
+            ]
+          },
+          "time": {
+            "type": "number",
+            "description": "Time of the keyframe to change",
+            "minimum": 0
+          },
+          "new_time": {
+            "type": "number",
+            "description": "New time",
+            "minimum": 0
+          },
+          "x": {
+            "type": "number",
+            "description": "New X value"
+          },
+          "y": {
+            "type": "number",
+            "description": "New Y value"
+          },
+          "z": {
+            "type": "number",
+            "description": "New Z value"
+          },
+          "interpolation": {
+            "type": "string",
+            "description": "New interpolation",
+            "enum": [
+              "linear",
+              "catmullrom",
+              "bezier",
+              "step"
+            ]
+          }
+        },
+        "required": [
+          "node",
+          "channel",
+          "time"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "KeyframeSummary"
+    },
+    {
+      "name": "modify_node",
+      "title": "Modify node",
+      "description": "Rename, move, rotate or hide any node (cube, group, locator). For cubes you can also change inflate, UV settings and face textures. Only the fields you pass are touched.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "references": {
+            "type": "array",
+            "description": "Apply the same change to several nodes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              },
+              "description": "Node reference; omit to use the current selection."
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Cube name"
+          },
+          "from": {
+            "type": "array",
+            "description": "Minimum corner in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "to": {
+            "type": "array",
+            "description": "Maximum corner in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "origin": {
+            "type": "array",
+            "description": "Pivot point; defaults to the centre of the cube (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation": {
+            "type": "array",
+            "description": "Euler rotation in degrees (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "inflate": {
+            "type": "number",
+            "description": "Uniform inflation in units (0 = none)"
+          },
+          "uv_offset": {
+            "type": "array",
+            "description": "Box UV offset on the texture (two numbers: [u, v])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "mirror_uv": {
+            "type": "boolean",
+            "description": "Mirror UV winding"
+          },
+          "shade": {
+            "type": "boolean",
+            "description": "Enable shading"
+          },
+          "autouv": {
+            "type": "integer",
+            "description": "Auto UV mode: 0 off, 1 auto, 2 relative",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "box_uv": {
+            "type": "boolean",
+            "description": "Use box UV instead of per-face UV"
+          },
+          "visibility": {
+            "type": "boolean",
+            "description": "Visible in the viewport"
+          },
+          "color": {
+            "type": "integer",
+            "description": "Marker colour index"
+          },
+          "texture": {
+            "type": "string",
+            "description": "Texture uuid or name to assign to every face; use null to clear"
+          },
+          "export": {
+            "type": "boolean",
+            "description": "Include in exports"
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "Lock editing"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ updated: NodeSummary[] }"
+    },
+    {
+      "name": "new_project",
+      "title": "New project",
+      "description": "Start a fresh empty project in the given model format. Use `free` for a generic project with no format restrictions, or a real format id such as `bedrock_entity`, `java_block`, `modded_entity` or `skin`.",
+      "group": "project",
+      "danger": "destructive",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "description": "Model format id",
+            "default": "free"
+          },
+          "resolution": {
+            "type": "array",
+            "description": "Texture resolution [width, height]",
+            "items": {
+              "type": "integer",
+              "description": "Pixels"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ project, available_formats }"
+    },
+    {
+      "name": "offset_nodes",
+      "title": "Offset nodes",
+      "description": "Translate one or more nodes by a delta, moving geometry and pivot together. `space` chooses whether the delta is applied to the node pivot (`origin`, default) or to the cube volume only.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "references": {
+            "type": "array",
+            "description": "Offset several nodes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              },
+              "description": "Node reference; omit to use the current selection."
+            }
+          },
+          "delta": {
+            "type": "array",
+            "description": "Translation delta in Blockbench units (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "space": {
+            "type": "string",
+            "description": "What to move",
+            "enum": [
+              "origin",
+              "geometry"
+            ]
+          }
+        },
+        "required": [
+          "delta"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ moved: [{ node, origin }] }"
+    },
+    {
+      "name": "open_project",
+      "title": "Open project",
+      "description": "Replace the current project with a .bbmodel document previously read by the bridge. Pass the parsed JSON document, not a path.",
+      "group": "project",
+      "danger": "destructive",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "object",
+            "description": "Parsed .bbmodel JSON document",
+            "properties": {}
+          },
+          "path": {
+            "type": "string",
+            "description": "Optional path used for naming and for relative texture paths"
+          },
+          "merge": {
+            "type": "boolean",
+            "description": "Merge into the current project instead of replacing it",
+            "default": false
+          }
+        },
+        "required": [
+          "model"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ project, merged }"
+    },
+    {
+      "name": "paint_texture",
+      "title": "Paint texture",
+      "description": "Draw pixels onto a texture. Operations are applied in order and may include fill, rect, outline, pixel (or a list of pixels), line, gradient_v, shade_rect (darken/lighten an existing region: Minecraft shading), copy_region, mirror_region and noise. Coordinates are pixels with (0,0) at the top left. Use this to author real textures rather than flat fills.",
+      "group": "texture",
+      "danger": "mutating",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "texture": {
+            "type": "string",
+            "description": "Texture name or uuid (defaults to the selected texture)"
+          },
+          "operations": {
+            "type": "array",
+            "description": "Paint operations applied in order",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Operation",
+                  "enum": [
+                    "fill",
+                    "clear",
+                    "clear_rect",
+                    "rect",
+                    "outline",
+                    "pixel",
+                    "line",
+                    "gradient_v",
+                    "shade_rect",
+                    "copy_region",
+                    "mirror_region",
+                    "noise"
+                  ]
+                },
+                "x": {
+                  "type": "number",
+                  "description": "X"
+                },
+                "y": {
+                  "type": "number",
+                  "description": "Y"
+                },
+                "width": {
+                  "type": "number",
+                  "description": "Width"
+                },
+                "height": {
+                  "type": "number",
+                  "description": "Height"
+                },
+                "x1": {
+                  "type": "number",
+                  "description": "Line start X"
+                },
+                "y1": {
+                  "type": "number",
+                  "description": "Line start Y"
+                },
+                "x2": {
+                  "type": "number",
+                  "description": "Line end X"
+                },
+                "y2": {
+                  "type": "number",
+                  "description": "Line end Y"
+                },
+                "sx": {
+                  "type": "number",
+                  "description": "Source X for copy_region"
+                },
+                "sy": {
+                  "type": "number",
+                  "description": "Source Y for copy_region"
+                },
+                "dx": {
+                  "type": "number",
+                  "description": "Destination X for copy_region"
+                },
+                "dy": {
+                  "type": "number",
+                  "description": "Destination Y for copy_region"
+                },
+                "color": {
+                  "type": "string",
+                  "description": "Hex colour #RRGGBB or #RRGGBBAA"
+                },
+                "color_top": {
+                  "type": "string",
+                  "description": "Top colour for gradient_v"
+                },
+                "color_bottom": {
+                  "type": "string",
+                  "description": "Bottom colour for gradient_v"
+                },
+                "colors": {
+                  "type": "array",
+                  "description": "Palette for noise",
+                  "items": {
+                    "type": "string",
+                    "description": "Hex colour"
+                  }
+                },
+                "density": {
+                  "type": "number",
+                  "description": "Noise density 0-1",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Brightness delta for shade_rect, e.g. -20"
+                },
+                "axis": {
+                  "type": "string",
+                  "description": "Mirror axis",
+                  "enum": [
+                    "x",
+                    "y"
+                  ]
+                },
+                "line_width": {
+                  "type": "number",
+                  "description": "Line width"
+                },
+                "pixels": {
+                  "type": "array",
+                  "description": "Explicit pixel list for the pixel operation",
+                  "items": {
+                    "type": "array",
+                    "description": "Pixel as [x, y]",
+                    "items": {
+                      "type": "number",
+                      "description": "Coordinate"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 500
+          }
+        },
+        "required": [
+          "operations"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ texture, operations_applied, texture_size }"
+    },
+    {
+      "name": "parent_object",
+      "title": "Reparent node",
+      "description": "Move an existing node under a different group, or to the outliner root when `parent` is omitted.",
+      "group": "hierarchy",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "parent": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Parent group uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Parent group name"
+              }
+            },
+            "description": "Parent group; omit to place at the outliner root.",
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ node, parent }"
+    },
+    {
+      "name": "redo",
+      "title": "Redo",
+      "description": "Step the project forward one or more undo entries.",
+      "group": "recovery",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "steps": {
+            "type": "integer",
+            "description": "How many entries to redo (1-200)",
+            "minimum": 1,
+            "maximum": 200
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ before, after, steps_applied }"
+    },
+    {
+      "name": "rollback",
+      "title": "Rollback",
+      "description": "Restore the project to a checkpoint. Prefers rewinding the undo stack, which is exact and instant; falls back to reloading the stored snapshot when the history has been trimmed. Always re-reads the resulting project and reports whether the rollback verified.",
+      "group": "recovery",
+      "danger": "destructive",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "checkpoint_id": {
+            "type": "string",
+            "description": "Checkpoint id, or \"last\" for the most recent one"
+          }
+        },
+        "required": [
+          "checkpoint_id"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ strategy, undo_steps, verified, verification, warnings }"
+    },
+    {
+      "name": "run_script",
+      "title": "Run script",
+      "description": "Execute a JavaScript snippet inside Blockbench with the verified globals in scope and return its JSON value. This is a last resort for things the tool registry cannot express; prefer the dedicated tools. Disabled by default and always requires confirm: true, plus a checkpoint is taken first.",
+      "group": "advanced",
+      "danger": "destructive",
+      "needs_checkpoint": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "JavaScript body. Use `return <value>` to produce a result.",
+            "maxLength": 20000
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Acknowledge that this executes arbitrary code",
+            "default": false
+          },
+          "make_undoable": {
+            "type": "boolean",
+            "description": "Bracket the script in a single undo entry",
+            "default": true
+          },
+          "label": {
+            "type": "string",
+            "description": "Undo label",
+            "default": "AI agent script"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ result, globals_available, undoable }"
+    },
+    {
+      "name": "save_project",
+      "title": "Save project",
+      "description": "Compile the whole project to a .bbmodel document and hand it back to the bridge, which writes it next to the active project file. No dialog is shown. Call mark_project_saved afterwards once the file is on disk.",
+      "group": "project",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "minify": {
+            "type": "boolean",
+            "description": "Produce a compact document",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ model, name, extension, save_path, counts, bytes }"
+    },
+    {
+      "name": "save_project_as",
+      "title": "Save project as",
+      "description": "Open Blockbench's native export dialog so the user chooses where to write the project. This is interactive and does not return a path; use save_project for headless saving.",
+      "group": "project",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "description": "Which codec to use",
+            "enum": [
+              "project",
+              "active"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ opened: true }"
+    },
+    {
+      "name": "select_animation",
+      "title": "Select animation",
+      "description": "Make an animation the active one, which is required for timeline and keyframe operations to apply to it.",
+      "group": "animation",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Animation name"
+          },
+          "uuid": {
+            "type": "string",
+            "description": "Animation uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "AnimationSummary"
+    },
+    {
+      "name": "select_object",
+      "title": "Select objects",
+      "description": "Change the outliner selection. `mode` decides whether the given nodes replace, extend or are removed from the selection. Useful before tools that default to the current selection.",
+      "group": "project",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "references": {
+            "type": "array",
+            "description": "Nodes to select",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              },
+              "description": "Node reference; omit to use the current selection."
+            },
+            "minItems": 1
+          },
+          "mode": {
+            "type": "string",
+            "description": "Selection mode",
+            "enum": [
+              "replace",
+              "add",
+              "remove"
+            ]
+          },
+          "include_children": {
+            "type": "boolean",
+            "description": "Also select descendants",
+            "default": false
+          }
+        },
+        "required": [
+          "references"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ selected: string[] }"
+    },
+    {
+      "name": "set_animation_time",
+      "title": "Set timeline time",
+      "description": "Scrub the playhead to a time and optionally start or stop playback. Use this to inspect a specific pose with get_viewport_image.",
+      "group": "animation",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "number",
+            "description": "Playhead time in seconds",
+            "minimum": 0
+          },
+          "playing": {
+            "type": "boolean",
+            "description": "Start or stop playback"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ time, playing }"
+    },
+    {
+      "name": "set_pivot",
+      "title": "Set pivot",
+      "description": "Set the rotation pivot of one or more nodes. Accepts explicit coordinates, or an anchor keyword that is resolved against the node bounds: `min`, `center`, `max`, `bottom_center` (the usual pivot for a Minecraft limb), `top_center`, `front_center` and `back_center`.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "references": {
+            "type": "array",
+            "description": "Set the pivot on several nodes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              },
+              "description": "Node reference; omit to use the current selection."
+            }
+          },
+          "pivot": {
+            "type": "array",
+            "description": "Explicit pivot coordinates (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "anchor": {
+            "type": "string",
+            "description": "Anchor keyword resolved from the node bounds",
+            "enum": [
+              "min",
+              "max",
+              "center",
+              "bottom_center",
+              "top_center",
+              "front_center",
+              "back_center",
+              "left_center",
+              "right_center"
+            ]
+          },
+          "offset": {
+            "type": "array",
+            "description": "Offset added to the resolved pivot (three numbers: [x, y, z])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "default": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ pivots: [{ node, pivot }] }"
+    },
+    {
+      "name": "set_project_settings",
+      "title": "Set project settings",
+      "description": "Change project level settings: name, texture resolution, box UV mode. Resolution is what UV coordinates are measured against, so set it before laying out textures.",
+      "group": "project",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Project name"
+          },
+          "resolution": {
+            "type": "array",
+            "description": "Texture resolution [width, height]",
+            "items": {
+              "type": "integer",
+              "description": "Pixels"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "box_uv": {
+            "type": "boolean",
+            "description": "Use box UV for the whole project"
+          },
+          "model_identifier": {
+            "type": "string",
+            "description": "Model identifier (Bedrock geometry identifier)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "ProjectSnapshot"
+    },
+    {
+      "name": "set_uv",
+      "title": "Set UV",
+      "description": "Set per-face UV rectangles on a cube. Each face needs a four number rectangle [u1, v1, u2, v2] in texture pixels. Also accepts cube level settings: uv_offset (box UV origin), rotation, autouv mode and box_uv. Set autouv to 0 when you want your explicit UVs to survive.",
+      "group": "texture",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Cube uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Cube name"
+              }
+            }
+          },
+          "faces": {
+            "type": "object",
+            "description": "Per-face UV rectangles keyed by face name",
+            "properties": {
+              "north": {
+                "type": "array",
+                "description": "north UV as [u1, v1, u2, v2]",
+                "items": {
+                  "type": "number",
+                  "description": "Coordinate"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "east": {
+                "type": "array",
+                "description": "east UV as [u1, v1, u2, v2]",
+                "items": {
+                  "type": "number",
+                  "description": "Coordinate"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "south": {
+                "type": "array",
+                "description": "south UV as [u1, v1, u2, v2]",
+                "items": {
+                  "type": "number",
+                  "description": "Coordinate"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "west": {
+                "type": "array",
+                "description": "west UV as [u1, v1, u2, v2]",
+                "items": {
+                  "type": "number",
+                  "description": "Coordinate"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "up": {
+                "type": "array",
+                "description": "up UV as [u1, v1, u2, v2]",
+                "items": {
+                  "type": "number",
+                  "description": "Coordinate"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "down": {
+                "type": "array",
+                "description": "down UV as [u1, v1, u2, v2]",
+                "items": {
+                  "type": "number",
+                  "description": "Coordinate"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              }
+            }
+          },
+          "uv_rotation": {
+            "type": "object",
+            "description": "Optional per-face UV rotation in degrees",
+            "properties": {
+              "north": {
+                "type": "number",
+                "description": "north rotation"
+              },
+              "east": {
+                "type": "number",
+                "description": "east rotation"
+              },
+              "south": {
+                "type": "number",
+                "description": "south rotation"
+              },
+              "west": {
+                "type": "number",
+                "description": "west rotation"
+              },
+              "up": {
+                "type": "number",
+                "description": "up rotation"
+              },
+              "down": {
+                "type": "number",
+                "description": "down rotation"
+              }
+            }
+          },
+          "uv_offset": {
+            "type": "array",
+            "description": "Box UV offset on the texture (two numbers: [u, v])",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "autouv": {
+            "type": "integer",
+            "description": "Auto UV mode: 0 off, 1 auto, 2 relative",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "box_uv": {
+            "type": "boolean",
+            "description": "Use box UV"
+          }
+        },
+        "required": [
+          "reference"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ cube, faces }"
+    },
+    {
+      "name": "set_visibility",
+      "title": "Set visibility",
+      "description": "Show or hide one or more nodes without deleting them.",
+      "group": "geometry",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "references": {
+            "type": "array",
+            "description": "Apply to several nodes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              },
+              "description": "Node reference; omit to use the current selection."
+            }
+          },
+          "visible": {
+            "type": "boolean",
+            "description": "True to show, false to hide"
+          }
+        },
+        "required": [
+          "visible"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ changed: string[] }"
+    },
+    {
+      "name": "transaction_abort",
+      "title": "Abort transaction",
+      "description": "Close the open undo bracket and revert everything that happened inside it. This is the clean way to back out of a failed build phase.",
+      "group": "recovery",
+      "danger": "destructive",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "returns": "{ aborted, undone_steps, project }"
+    },
+    {
+      "name": "transaction_begin",
+      "title": "Begin transaction",
+      "description": "Open an undo bracket so every following agent tool call collapses into ONE undo step. Use it to wrap a whole build phase (for example \"create the entire T-Rex skeleton\") so the user can undo it with a single Ctrl+Z.",
+      "group": "recovery",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Undo label shown in Blockbench history",
+            "default": "AI agent transaction"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ active, label, undo_index }"
+    },
+    {
+      "name": "transaction_commit",
+      "title": "Commit transaction",
+      "description": "Close the open undo bracket and record it as a single undo entry.",
+      "group": "recovery",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "returns": "{ committed, label, steps, undo_index }"
+    },
+    {
+      "name": "undo",
+      "title": "Undo",
+      "description": "Step the project back one undo entry, optionally several times. Returns the undo stack position before and after.",
+      "group": "recovery",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "steps": {
+            "type": "integer",
+            "description": "How many entries to undo (1-200)",
+            "minimum": 1,
+            "maximum": 200
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ before, after, steps_applied }"
+    },
+    {
+      "name": "unparent_object",
+      "title": "Unparent node",
+      "description": "Detach one or more nodes from their parent and move them to the outliner root.",
+      "group": "hierarchy",
+      "danger": "mutating",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "description": "Node uuid"
+              },
+              "name": {
+                "type": "string",
+                "description": "Node name"
+              }
+            },
+            "description": "Node reference; omit to use the current selection."
+          },
+          "references": {
+            "type": "array",
+            "description": "Unparent several nodes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "description": "Node uuid"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Node name"
+                }
+              },
+              "description": "Node reference; omit to use the current selection."
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ moved: string[] }"
+    },
+    {
+      "name": "validate_model",
+      "title": "Validate model",
+      "description": "Self-check the project and return concrete defects with severity: zero or negative size cubes, duplicate names, elements without textures, UV rectangles outside the texture, empty groups, animations without keyframes, missing pivots and unreferenced textures. Run this after building and before saving.",
+      "group": "inspect",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "max_issues": {
+            "type": "integer",
+            "description": "Cap the number of reported issues",
+            "default": 60,
+            "minimum": 1,
+            "maximum": 500
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ issues: [{severity, code, message, node?}], summary, ok }"
+    }
+  ],
+  "bridge": [
+    {
+      "name": "bridge_look",
+      "title": "Look at the model",
+      "description": "Render the model from several camera angles and return them as ONE contact sheet image. This is the primary way to see what you have built. The result lists each angle with its pixel region in the sheet. Use it after every meaningful batch of edits, and always before claiming a model looks right.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "angles": {
+            "type": "array",
+            "description": "Camera presets to include (default: the standard five-angle set)",
+            "items": {
+              "type": "string",
+              "description": "Preset id"
+            },
+            "maxItems": 8
+          },
+          "resolution": {
+            "type": "integer",
+            "description": "Resolution per angle in pixels",
+            "default": 448,
+            "minimum": 192,
+            "maximum": 1024
+          },
+          "columns": {
+            "type": "integer",
+            "description": "Contact sheet columns",
+            "default": 3,
+            "minimum": 1,
+            "maximum": 4
+          },
+          "annotation": {
+            "type": "string",
+            "description": "What you are checking, e.g. \"silhouette after adding the tail\""
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ data_url, width, height, cells[], missing[], saved_to }"
+    },
+    {
+      "name": "bridge_generate_texture",
+      "title": "Generate a texture",
+      "description": "Generate a pixel-art texture procedurally and return it as a PNG data URL ready for create_texture or import_texture. Use this for organic, repetitive parts of a skin (scale patterns, dithered shading, scattered spots, stripes). Use paint_texture inside Blockbench for deliberate details such as eyes, teeth and claws. Deterministic: the same seed regenerates the same texture. The result includes the colour histogram so you can judge contrast.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "File and texture name, e.g. \"trex_body\""
+          },
+          "width": {
+            "type": "integer",
+            "description": "Width in texels",
+            "default": 32,
+            "minimum": 1,
+            "maximum": 256
+          },
+          "height": {
+            "type": "integer",
+            "description": "Height in texels",
+            "minimum": 1,
+            "maximum": 256
+          },
+          "base": {
+            "type": "string",
+            "description": "Base colour as hex, e.g. \"#5c7a3a\""
+          },
+          "palette": {
+            "type": "array",
+            "description": "Explicit shade ramp, darkest first",
+            "items": {
+              "type": "string",
+              "description": "Hex colour"
+            },
+            "maxItems": 12
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Pattern",
+            "enum": [
+              "flat",
+              "noise",
+              "scales",
+              "stripes",
+              "spots",
+              "gradient",
+              "checker"
+            ]
+          },
+          "scale": {
+            "type": "integer",
+            "description": "Feature size in texels",
+            "minimum": 1,
+            "maximum": 64
+          },
+          "density": {
+            "type": "number",
+            "description": "Coverage 0-1 for noise and spots",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "shading": {
+            "type": "string",
+            "description": "Lighting model",
+            "enum": [
+              "none",
+              "top",
+              "bottom",
+              "radial",
+              "vertical"
+            ]
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Random seed (reuse to reproduce a texture)"
+          },
+          "border": {
+            "type": "string",
+            "description": "Colour for a 1px border that hides cube seams, e.g. \"#2b2b2b\""
+          },
+          "split_color": {
+            "type": "string",
+            "description": "Secondary colour applied below split_at"
+          },
+          "split_at": {
+            "type": "number",
+            "description": "Fraction of the height where split_color starts (0-1)"
+          },
+          "also_create": {
+            "type": "boolean",
+            "description": "Create the texture inside Blockbench immediately as well",
+            "default": false
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ name, width, height, data_url, palette, histogram, seed, saved_to, created_in_blockbench }"
+    },
+    {
+      "name": "bridge_save",
+      "title": "Save the project",
+      "description": "Compile the project and actually write the .bbmodel to disk, then clear the unsaved marker in Blockbench. Use this rather than the plugin's save_project: the plugin can only compile the document (it has no filesystem access), so the file is written here, next to the project's existing path when there is one and into the workspace otherwise.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Override the file name, without extension"
+          },
+          "directory": {
+            "type": "string",
+            "description": "Absolute directory to write into (defaults to the project path or the workspace)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ saved_to, bytes, counts, format_id, verified }"
+    },
+    {
+      "name": "bridge_checkpoint",
+      "title": "Create checkpoint",
+      "description": "Record a restorable checkpoint of the current project (geometry, hierarchy, UVs, textures and animations). Call this before a large restructure so you can roll back instead of repairing. Blockbench also checkpoints automatically before destructive tools.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Short description of the state, e.g. \"before adding the tail\""
+          }
+        },
+        "required": [
+          "label"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "CheckpointOutcome"
+    },
+    {
+      "name": "bridge_rollback",
+      "title": "Roll back",
+      "description": "Restore a checkpoint by id. Use it when a change went badly wrong; it is cheaper and safer than trying to undo a large restructure by hand. Calling it with no id restores the most recent checkpoint.",
+      "group": "bridge",
+      "danger": "destructive",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "checkpoint_id": {
+            "type": "string",
+            "description": "Checkpoint id (defaults to the latest)"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the rollback is needed"
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ checkpoint_id, label, restored, verified }"
+    },
+    {
+      "name": "bridge_remember",
+      "title": "Remember",
+      "description": "Persist project context so a future run does not have to rediscover it: the goal, the target format, the scale convention, a design decision with its rationale, a note, or a known issue. Use it whenever you make a judgement call the user would want explained later.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "goal": {
+            "type": "string",
+            "description": "Overall project goal"
+          },
+          "target_format": {
+            "type": "string",
+            "description": "Target Blockbench format id, e.g. \"java_block\""
+          },
+          "scale": {
+            "type": "string",
+            "description": "Scale convention, e.g. \"1 cube = 1/16 block\""
+          },
+          "naming": {
+            "type": "array",
+            "description": "Naming conventions to follow",
+            "items": {
+              "type": "string",
+              "description": "Convention"
+            },
+            "maxItems": 12
+          },
+          "note": {
+            "type": "string",
+            "description": "Free-form note"
+          },
+          "known_issue": {
+            "type": "string",
+            "description": "Something wrong that is known and accepted"
+          },
+          "decision": {
+            "type": "object",
+            "description": "A design decision to record",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "description": "What the decision is about, e.g. \"leg length\""
+              },
+              "decision": {
+                "type": "string",
+                "description": "What you decided"
+              },
+              "rationale": {
+                "type": "string",
+                "description": "Why"
+              },
+              "source": {
+                "type": "string",
+                "description": "Where the evidence came from, e.g. \"reference 2\""
+              }
+            },
+            "required": [
+              "topic",
+              "decision",
+              "rationale"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ project, decision?, stored_at }"
+    },
+    {
+      "name": "bridge_plan",
+      "title": "Plan tasks",
+      "description": "Write down the subtasks of a long build so progress survives the end of the run and so you can check yourself against the plan. Call it once after OBSERVE, then keep it current with plan_update.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "description": "Subtasks in order",
+            "items": {
+              "type": "object",
+              "description": "A subtask",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Short title, e.g. \"legs and claws\""
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "What \"done\" means"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Status",
+                  "enum": [
+                    "pending",
+                    "in_progress",
+                    "done",
+                    "failed",
+                    "blocked"
+                  ]
+                }
+              },
+              "required": [
+                "title"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 40
+          }
+        },
+        "required": [
+          "tasks"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ tasks: TaskRecord[] }"
+    },
+    {
+      "name": "bridge_plan_update",
+      "title": "Update a plan step",
+      "description": "Mark a subtask done or failed and attach what you learned. Keep the plan honest: a step is only \"done\" once you have inspected the result.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Task title to update"
+          },
+          "id": {
+            "type": "string",
+            "description": "Task id, if you have it"
+          },
+          "status": {
+            "type": "string",
+            "description": "New status",
+            "enum": [
+              "pending",
+              "in_progress",
+              "done",
+              "failed",
+              "blocked"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "description": "What happened, e.g. \"tail pivots were 2px off, fixed\""
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "TaskRecord"
+    },
+    {
+      "name": "bridge_references",
+      "title": "Re-read the reference images",
+      "description": "Re-attach the reference images from ./references to the conversation when you need to re-examine proportions, colours or markings. They are also attached at the start of the task.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "names": {
+            "type": "array",
+            "description": "Reference file names to re-read (default: all)",
+            "items": {
+              "type": "string",
+              "description": "File name"
+            }
+          },
+          "note": {
+            "type": "string",
+            "description": "What you are looking for, e.g. \"leg thickness relative to the body\""
+          }
+        },
+        "additionalProperties": false
+      },
+      "returns": "{ attached, references: {name, mime, bytes}[] }"
+    },
+    {
+      "name": "bridge_finish",
+      "title": "Finish the task",
+      "description": "End the task and report the result to the user. Call it ONLY after you have inspected the rendered model and, when the task asked for a saved file, saved the project. Set verified true only if you personally confirmed the result with a visual check and validate_model.",
+      "group": "bridge",
+      "danger": "safe",
+      "needs_checkpoint": false,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string",
+            "description": "What you built, what you verified, and anything still weak"
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "True only if the final state was inspected and matches the request"
+          },
+          "saved": {
+            "type": "boolean",
+            "description": "True if the project was saved"
+          },
+          "remaining": {
+            "type": "string",
+            "description": "Anything still to do, if the task is not fully complete"
+          }
+        },
+        "required": [
+          "summary"
+        ],
+        "additionalProperties": false
+      },
+      "returns": "{ finished: true }"
+    }
+  ]
+}

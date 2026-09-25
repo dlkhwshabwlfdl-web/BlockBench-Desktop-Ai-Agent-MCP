@@ -1,0 +1,594 @@
+{"at":1790192377000,"level":"info","message":"bridge starting","data":{"workspace":"F:\\resourcepack\\Trex","endpoint":"127.0.0.1:47311","auth":"anonymous (loopback only)","provider":"openai-compatible","model":"gpt-4o-mini","base_url":"https://api.openai.com/v1","api_key_state":"not***redacted***","vision":true,"max_steps":60,"plugin_dir":"C:\\Users\\FaFa\\AppData\\Roaming\\Blockbench\\plugins"}}
+{"at":1790192377016,"level":"info","message":"bridge listening on http://127.0.0.1:47311 (plugin socket: ws://127.0.0.1:47311/plugin)"}
+{"at":1790192377016,"level":"info","message":"authentication: anonymous (loopback + Origin checked) — paste the URL above into the Blockbench panel"}
+{"at":1790192475952,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790192475954,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790192475954,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790192475956,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790192476075,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790192476075,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790192508167,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790192508167,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790192680869,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790192680871,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790192680871,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790192680873,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790192680993,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790192680993,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790192808679,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790192808680,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790193002203,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790193002204,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790193002204,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790193002206,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790193002326,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790193002326,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790193012650,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790193012650,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790193046500,"level":"info","message":"task queued: task-mueipv50-4fw3 — You are an autonomous Blockbench 5.2.1 modeling agent.\n\nYour task is to ACTUALLY BUILD a complete, high-quality Minecraf"}
+{"at":1790193046502,"level":"info","message":"task task-mueipv50-4fw3 started from the Blockbench panel"}
+{"at":1790193046511,"level":"info","message":"task started with 77 tools available (67 from the plugin)"}
+{"at":1790193046512,"level":"debug","message":"POST https://api.openai.com/v1/chat/completions (99 KB, 2 messages)"}
+{"at":1790193047706,"level":"error","message":"agent run failed: model endpoint returned HTTP 401: { \"error\": { \"message\": \"You didn't provide an API key. You need to provide your API key in an Authorization header using Bearer auth (i.e. Authorization: Bearer ***redacted***), or as the password field (with blank username) if you're accessing the API from your browser and are prompted for a username an…"}
+{"at":1790193047710,"level":"info","message":"task task-mueipv50-4fw3 error in 1 steps (0 tool calls)"}
+{"at":1790193050948,"level":"info","message":"task queued: task-mueipykk-gwua — You are an autonomous Blockbench 5.2.1 modeling agent.\n\nYour task is to ACTUALLY BUILD a complete, high-quality Minecraf"}
+{"at":1790193050949,"level":"info","message":"task task-mueipykk-gwua started from the Blockbench panel"}
+{"at":1790193050950,"level":"info","message":"task started with 77 tools available (67 from the plugin)"}
+{"at":1790193050951,"level":"debug","message":"POST https://api.openai.com/v1/chat/completions (99 KB, 2 messages)"}
+{"at":1790193051432,"level":"error","message":"agent run failed: model endpoint returned HTTP 401: { \"error\": { \"message\": \"You didn't provide an API key. You need to provide your API key in an Authorization header using Bearer auth (i.e. Authorization: Bearer ***redacted***), or as the password field (with blank username) if you're accessing the API from your browser and are prompted for a username an…"}
+{"at":1790193051434,"level":"info","message":"task task-mueipykk-gwua error in 1 steps (0 tool calls)"}
+{"at":1790193052564,"level":"info","message":"[plugin] workspace inspected from the Blockbench panel"}
+{"at":1790193052696,"level":"info","message":"capabilities updated (requested): format free"}
+{"at":1790193052696,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790193840066,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790193840066,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790193842060,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790193842061,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790193842061,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790193842063,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790193900069,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790193900069,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790193902061,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790193902062,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790193902062,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790193902064,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790193960063,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790193960063,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790193962057,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790193962058,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790193962058,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790193962059,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194020061,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194020061,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194022066,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194022067,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194022067,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194022068,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194080068,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194080069,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194082066,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194082067,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194082067,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194082068,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194200064,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194200064,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194202069,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194202069,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194202070,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194202071,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194260055,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194260055,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194262057,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194262058,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194262058,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194262059,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194320061,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194320061,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194322059,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194322060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194322060,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194322061,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194380064,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194380064,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194382063,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194382070,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194382070,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194382072,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194440055,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194440055,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194442064,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194442064,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194442064,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194442066,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194500061,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194500061,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194502059,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194502060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194502060,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194502060,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194560066,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194560067,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194562068,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194562069,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194562069,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194562070,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194620067,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194620067,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194622056,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194622056,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194622056,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194622058,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194680062,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194680062,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194682061,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194682062,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194682062,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194682062,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194700893,"level":"info","message":"checkpoint stored: before T-Rex build (F:\\resourcepack\\Trex\\ai_context\\checkpoints\\cp-muejpbo8-1.json)"}
+{"at":1790194740081,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194740081,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194742062,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194742062,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194742062,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194742064,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194800067,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194800067,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194802116,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194802117,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194802117,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194802118,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790194860075,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790194860075,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790194862065,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790194862066,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790194862066,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790194862067,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790195285887,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790195285888,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790195678316,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790195678317,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790195678317,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790195678319,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790195678444,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790195678444,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790195805607,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790195805607,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790195872983,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790195872983,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790195883232,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790195883233,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790195883233,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790195883235,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790195883362,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790195883362,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790195883592,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790195883593,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196000055,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790196000055,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790196002053,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790196002054,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196002054,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790196002055,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790196005120,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790196005120,"level":"info","message":"plugin disconnected (1006)"}
+{"at":1790196012035,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790196012036,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196012036,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790196012039,"level":"info","message":"tool catalogue refreshed: 67 tools"}
+{"at":1790196012158,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790196012158,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196015258,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790196015258,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196238583,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790196238583,"level":"info","message":"plugin disconnected (1006)"}
+{"at":1790196246042,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790196246043,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196246043,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790196246046,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790196246166,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790196246166,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196249362,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790196249362,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196866056,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790196866056,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790196866062,"level":"warn","message":"REST POST /tool/modify_node failed: The Blockbench plugin is not connected. Open Blockbench with the AI Agent plugin enabled and press Connect."}
+{"at":1790196866064,"level":"warn","message":"REST POST /tool/transaction_abort failed: The Blockbench plugin is not connected. Open Blockbench with the AI Agent plugin enabled and press Connect."}
+{"at":1790196868055,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790196868055,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196868056,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790196868057,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790196879659,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790196879660,"level":"info","message":"plugin disconnected (1006)"}
+{"at":1790196885881,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790196885883,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196885883,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790196885885,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790196886005,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790196886006,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196887714,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790196887715,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790196908330,"level":"info","message":"capabilities updated (project_opened): format free · lost: mode.animation"}
+{"at":1790196908330,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197053285,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790197053285,"level":"info","message":"plugin disconnected (1006)"}
+{"at":1790197059565,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790197059567,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197059567,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790197059569,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790197059689,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790197059689,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197076265,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790197076265,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197208979,"level":"info","message":"capabilities updated (project_opened): format free · lost: mode.animation"}
+{"at":1790197208979,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197217448,"level":"info","message":"capabilities updated (project_opened): format free"}
+{"at":1790197217448,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197219400,"level":"info","message":"capabilities updated (project_opened): format free"}
+{"at":1790197219401,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197380059,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790197380059,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790197382066,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790197382067,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197382067,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790197382069,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790197438117,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790197438117,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790197439228,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790197439229,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197439229,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790197439236,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790197634745,"level":"info","message":"capabilities updated (project_opened): format free"}
+{"at":1790197634745,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197644534,"level":"info","message":"capabilities updated (project_opened): format free"}
+{"at":1790197644535,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197653164,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790197653164,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790197669678,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790197669678,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197669679,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790197669680,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790197669806,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790197669806,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197673518,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790197673518,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790197678886,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790197678887,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197678887,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790197678889,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790197679012,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790197679012,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197719902,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790197719903,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790197940720,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790197940721,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790197940721,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790197940728,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790197940847,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790197940847,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198160058,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198160058,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198162067,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198162067,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198162067,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198162069,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198163065,"level":"info","message":"capabilities updated (project_opened): format free · lost: mode.animation"}
+{"at":1790198163065,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198220090,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198220091,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198222061,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198222061,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198222061,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198222063,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198280103,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198280103,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198282068,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198282069,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198282069,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198282070,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198340111,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198340111,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198342068,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198342070,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198342070,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198342071,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198400119,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198400119,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198402062,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198402063,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198402063,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198402064,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198460112,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198460112,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198462057,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198462058,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198462058,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198462059,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198520103,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198520103,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198522068,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198522069,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198522069,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198522071,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198580120,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198580120,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790198582058,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790198582059,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790198582059,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790198582060,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790198639174,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790198639174,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790199139897,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790199139898,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790199139898,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790199139900,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790199140020,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790199140020,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790199851726,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790199851726,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790199956867,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790199956868,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790200507406,"level":"warn","message":"REST POST /tool/run_script failed: The Blockbench plugin is not connected. Open Blockbench with the AI Agent plugin enabled and press Connect."}
+{"at":1790201081094,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790201081095,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790201081095,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790201081098,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790201081220,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790201081220,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790201115600,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790201115600,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790201123878,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790201123879,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790201685368,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790201685370,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790201685370,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790201685372,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790201685496,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790201685496,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790201711088,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790201711088,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790202017212,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790202017213,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790202018308,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790202018310,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790202018310,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790202018311,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790202018440,"level":"info","message":"capabilities updated (project_opened): format free · lost: mode.animation"}
+{"at":1790202018441,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790202699295,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790202699295,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790202819413,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790202819414,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790202819414,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790202819415,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790202819536,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790202819536,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790202843970,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790202843971,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790202986741,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790202986742,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790202986742,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790202986744,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790202986873,"level":"info","message":"capabilities updated (project_opened): format none"}
+{"at":1790202986873,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790202990745,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790202990745,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203080062,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203080062,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203082071,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203082072,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203082072,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203082073,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203083065,"level":"info","message":"capabilities updated (project_opened): format none · lost: group.bone_rig, mesh.support, locator.support, mode.animation"}
+{"at":1790203083065,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203140064,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203140064,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203142069,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203142070,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203142070,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790203142071,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203200056,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203200057,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203202062,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203202063,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203202063,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790203202064,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203260069,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203260069,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203262071,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203262073,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203262073,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790203262075,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203320068,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203320068,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203322064,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203322066,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203322066,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790203322067,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203380057,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203380058,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203382059,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203382060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203382060,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790203382062,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203440059,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203440059,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203442056,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203442057,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203442057,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790203442058,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203467059,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support, mode.animation"}
+{"at":1790203467060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203500208,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203500208,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203502058,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203502059,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203502059,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203502061,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203560225,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203560225,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203562061,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203562062,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203562062,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203562063,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203620240,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203620240,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203622060,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203622061,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203622062,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203622063,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203680172,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203680172,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203682069,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203682070,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203682070,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203682071,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203721664,"level":"info","message":"capabilities updated (project_opened): format free · lost: mode.animation"}
+{"at":1790203721664,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203822458,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203822458,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203822458,"level":"warn","message":"REST POST /tool/inspect_project failed: plugin disconnected while waiting for inspect_project"}
+{"at":1790203824055,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203824056,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203824056,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203824057,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203920099,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203920099,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203922064,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203922065,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203922066,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203922067,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790203980209,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790203980209,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790203982070,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790203982071,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790203982071,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790203982073,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204040204,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204040204,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204042057,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204042058,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204042058,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204042059,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204100205,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204100205,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204102064,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204102065,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204102065,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204102067,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204160228,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204160228,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204162059,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204162060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204162060,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204162061,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204220197,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204220197,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204222059,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204222060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204222061,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204222062,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204280219,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204280219,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204282059,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204282060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204282060,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204282061,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204340198,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204340198,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204342066,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204342067,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204342067,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204342068,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204400193,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204400193,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204402062,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204402062,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204402063,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204402063,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204460236,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204460236,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204462067,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204462069,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204462069,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204462070,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204514302,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204514302,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790204515558,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204515559,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204515559,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790204515560,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204568860,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204568860,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790204846026,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204846028,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204846028,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790204846030,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204846157,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790204846158,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204858369,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790204858369,"level":"info","message":"plugin disconnected (1001)"}
+{"at":1790204862805,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790204862806,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790204862806,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format none"}
+{"at":1790204862809,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790204862933,"level":"info","message":"capabilities updated (project_opened): format free · now available: group.bone_rig, mesh.support, locator.support"}
+{"at":1790204862933,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205083167,"level":"info","message":"capabilities updated (project_opened): format free · lost: mode.animation"}
+{"at":1790205083167,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205180068,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205180068,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205182061,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205182062,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205182062,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205182063,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205240211,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205240211,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205242064,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205242065,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205242065,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205242066,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205300248,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205300248,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205302067,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205302068,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205302068,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205302070,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205360231,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205360231,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205362069,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205362070,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205362071,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205362072,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205420199,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205420199,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205422068,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205422069,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205422069,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205422070,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205480206,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205480206,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205482062,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205482063,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205482063,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205482065,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205540195,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205540195,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205542070,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205542070,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205542071,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205542072,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205600217,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205600217,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205602068,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205602069,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205602069,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205602071,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205651475,"level":"info","message":"checkpoint stored: before final polish — legendary crate (112 cubes, 22 anims, pass2) (F:\\resourcepack\\Trex\\ai_context\\checkpoints\\cp-mueq80yh-3.json)"}
+{"at":1790205684288,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205684288,"level":"info","message":"plugin disconnected (4000)"}
+{"at":1790205686059,"level":"info","message":"plugin socket opened, awaiting handshake"}
+{"at":1790205686060,"level":"info","message":"plugin link established — the agent can build now"}
+{"at":1790205686060,"level":"info","message":"plugin connected: Blockbench 5.2.1 · format free"}
+{"at":1790205686062,"level":"info","message":"tool catalogue refreshed: 68 tools"}
+{"at":1790205743033,"level":"warn","message":"plugin link lost — the bridge keeps running and will reconnect"}
+{"at":1790205743034,"level":"info","message":"plugin disconnected (1001)"}
